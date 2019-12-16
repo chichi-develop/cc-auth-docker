@@ -3,7 +3,7 @@ import session from 'express-session'
 import redis from 'redis'
 import connectRedis from 'connect-redis'
 import uuid from 'uuid/v4'
-import { REDIS_HOST, REDIS_PORT } from '../constants'
+import { REDIS_HOST, REDIS_PORT, REDIS_TTL } from '../constants'
 
 const redisClient = redis.createClient({ host: REDIS_HOST, port: REDIS_PORT })
 
@@ -19,7 +19,7 @@ export default (app: Express.Application) => {
     },
     store: new RedisStore({
       client: redisClient,
-      ttl: 60
+      ttl: REDIS_TTL
     }),
     // name: '_redisDemo',
     secret: process.env.SESSION_SECRET || 'some_secret_value_here',

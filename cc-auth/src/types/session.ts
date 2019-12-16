@@ -3,7 +3,7 @@ import Express from 'express'
 declare global {
   namespace Express {
     interface SessionData {
-      count?: number
+      count?: number // not use
     }
   }
 }

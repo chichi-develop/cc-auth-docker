@@ -64,3 +64,4 @@ yarn.lock
 package-lock.json
 
 dist
+cookie-file.txt

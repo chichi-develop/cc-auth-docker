@@ -37,7 +37,7 @@ export default (app: Express.Application) => {
   })
 
   app.post('/login', function(req, res, next) {
-    passport.authenticate('local', (err, user, info) => {
+    passport.authenticate('local', (err, user: User, info) => {
       if (info) {
         return res.send(info.message)
       }
@@ -47,7 +47,7 @@ export default (app: Express.Application) => {
       if (!user) {
         return res.send('POST / ERROR.')
       }
-      req.login(user as User, err => {
+      req.login(user, err => {
         if (err) {
           return next(err)
         }
@@ -55,8 +55,10 @@ export default (app: Express.Application) => {
           sessionID: req.sessionID,
           // username: req.user.id,
           // error: null,
-          isAuthenticated: req.isAuthenticated()
-          // email: req.isAuthenticated() ? req.user.email : null
+          isAuthenticated: req.isAuthenticated(),
+          id: req.isAuthenticated() ? user.id : null,
+          email: req.isAuthenticated() ? user.email : null,
+          privilege: req.isAuthenticated() ? user.privilege : null
         })
       })
     })(req, res, next)

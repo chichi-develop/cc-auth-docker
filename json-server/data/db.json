@@ -1,14 +1,28 @@
 {
   "users": [
     {
+      "id": "1de3z8o",
+      "email": "owner@test.com",
+      "password": "$2a$10$eUXfnzX009hlyYzAssDoZeW56Zrb5Gjmru4CfP0/A1EURQ2AkKHlu",
+      "privilege": ["cc-publis-owner"]
+    },
+    {
       "id": "2f24vvg",
-      "email": "test4@test.com",
-      "password": "$2a$10$eUXfnzX009hlyYzAssDoZeW56Zrb5Gjmru4CfP0/A1EURQ2AkKHlu"
+      "email": "kanri@test.com",
+      "password": "$2a$10$eUXfnzX009hlyYzAssDoZeW56Zrb5Gjmru4CfP0/A1EURQ2AkKHlu",
+      "privilege": ["cc-publis-viewer", "cc-publis-editor-kanri"]
     },
     {
       "id": "d1u9nq",
-      "email": "user2@example.com",
-      "password": "$2a$10$eUXfnzX009hlyYzAssDoZeW56Zrb5Gjmru4CfP0/A1EURQ2AkKHlu"
+      "email": "eigyo@test.com",
+      "password": "$2a$10$eUXfnzX009hlyYzAssDoZeW56Zrb5Gjmru4CfP0/A1EURQ2AkKHlu",
+      "privilege": ["cc-publis-viewer", "cc-publis-editor-eigyo"]
+    },
+    {
+      "id": "a9uc7jq",
+      "email": "viewer@test.com",
+      "password": "$2a$10$eUXfnzX009hlyYzAssDoZeW56Zrb5Gjmru4CfP0/A1EURQ2AkKHlu",
+      "privilege": ["cc-publis-viewer"]
     }
   ]
 }
