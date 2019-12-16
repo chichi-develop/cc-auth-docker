@@ -1,0 +1,16 @@
+version: "3"
+services:
+  node:
+    container_name: json-server
+    build:
+      context: .
+    ports:
+      - "8080:3000"
+    volumes:
+      - "./data:/app/data"
+    command: json-server --watch --host 0.0.0.0 /app/data/db.json
+
+networks:
+  default:
+    external:
+      name: chichi-network
