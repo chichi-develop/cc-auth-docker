@@ -24,7 +24,7 @@ export default (app: Express.Application) => {
     // name: '_redisDemo',
     secret: process.env.SESSION_SECRET || 'some_secret_value_here',
     resave: false
-    // saveUninitialized: true
+    saveUninitialized: true
   }
 
   app.use(session(option))
