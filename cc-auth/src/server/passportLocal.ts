@@ -3,8 +3,8 @@ import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 import axios from 'axios'
 import bcrypt from 'bcryptjs'
-import { User } from '../types/api'
-import { API_HOST, API_PORT } from '../constants'
+import { Auth } from '../types/api'
+import { API_HOST, API_PORT } from '../config/constants'
 
 export default (app: Express.Application) => {
   passport.use(
@@ -12,32 +12,32 @@ export default (app: Express.Application) => {
       axios
         .get(`http://${API_HOST}:${API_PORT}/users?email=${email}`)
         .then(res => {
-          const user = res.data[0]
-          if (!user) {
+          const auth = res.data[0]
+          if (!auth) {
             return done(null, false, { message: 'Invalid credentials.\n' })
           }
-          if (!bcrypt.compareSync(password, user.password)) {
+          if (!bcrypt.compareSync(password, auth.password)) {
             return done(null, false, { message: 'Invalid credentials.\n' })
           }
-          return done(null, user)
+          return done(null, auth)
         })
         .catch(error => done(error))
     })
   )
 
-  passport.serializeUser((user: User, done) => {
-    done(null, user.id)
+  passport.serializeUser((auth: Auth, done) => {
+    done(null, auth.id)
   })
 
   passport.deserializeUser((id, done) => {
     axios
       .get(`http://${API_HOST}:${API_PORT}/users?id=${id}`)
       .then(res => {
-        const user = res.data[0]
-        if (!user) {
+        const auth = res.data[0]
+        if (!auth) {
           return done(null, false)
         }
-        return done(null, user)
+        return done(null, auth)
       })
       .catch(error => done(error, false))
   })

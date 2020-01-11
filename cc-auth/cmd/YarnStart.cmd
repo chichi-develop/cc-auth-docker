@@ -1,1 +1,1 @@
-export SESSION_SECRET=some_secret_value_here && npm run dev
+export SESSION_SECRET=some_secret_value_here && yarn run dev

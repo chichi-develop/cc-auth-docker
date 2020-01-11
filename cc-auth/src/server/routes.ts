@@ -1,90 +1,55 @@
 import Express from 'express'
 import passport from 'passport'
 import createError from 'http-errors'
-import { User } from '../types/api'
-// import { Health } from '../types/api'
+import { Auth } from '../types/api'
 
 export default (app: Express.Application) => {
-  // ______________________________________________________
-  //
-  // session.count 初期化 middleWare
-  //
-  // app.use((req, res, next) => {
-  //   if (req.session !== undefined) {
-  //     if (req.session.count === undefined || req.session.count === null) {
-  //       req.session.count = 0
-  //     }
-  //   }
-  //   next()
-  // })
-  // ______________________________________________________
-  //
-  // 画面表示用 ルート・ハンドラー
-  //
-  app.get('/', (req, res, next) => {
+  app.get('/auth/check', (req, res, next) => {
     if (req.session) {
-      // if (req.session.count === undefined) return
-      // const data: { count: number } = { count: req.session.count }
-      // res.render('index.ejs', data)
       res.status(200).json({
         message: `OK GET /. sessionID: ${
           req.sessionID
-        }, isAuthenticated: ${req.isAuthenticated()} }`
+          }, isAuthenticated: ${req.isAuthenticated()} }`
       })
       return
     }
     next(createError(401))
   })
 
-  app.post('/login', function(req, res, next) {
-    passport.authenticate('local', (err, user: User, info) => {
+  app.post('/auth/login', function (req, res, next) {
+    passport.authenticate('local', (err, auth: Auth, info) => {
       if (info) {
-        return res.send(info.message)
+        return res.send({ error: { message: info.message } })
       }
       if (err) {
         return next(err)
       }
-      if (!user) {
+      if (!auth) {
         return res.send('POST / ERROR.')
       }
-      req.login(user, err => {
+      req.login(auth, err => {
         if (err) {
           return next(err)
         }
+        console.log(`authenticated(${req.sessionID})`)
         res.send({
           sessionID: req.sessionID,
-          // username: req.user.id,
-          // error: null,
           isAuthenticated: req.isAuthenticated(),
-          id: req.isAuthenticated() ? user.id : null,
-          email: req.isAuthenticated() ? user.email : null,
-          privilege: req.isAuthenticated() ? user.privilege : null
+          id: req.isAuthenticated() ? auth.id : null,
+          email: req.isAuthenticated() ? auth.email : null,
+          privilege: req.isAuthenticated() ? auth.privilege : null
         })
       })
     })(req, res, next)
   })
 
-  app.get('/logout', function(req, res, next) {
+  app.get('/auth/logout', function (req, res, next) {
     req.logout()
     if (req.session) {
-      req.session.destroy(function() {
+      req.session.destroy(function () {
+        console.log(`destroyed session(${req.sessionID})`)
         res.send('destroyed session')
       })
     }
   })
-  // ______________________________________________________
-  //
-  // 「ping」ボタン押下時の リクエストハンドラー
-  //
-  // app.get('/ping', (req, res, next) => {
-  //   if (req.session) {
-  //     if (req.session.count !== undefined) {
-  //       req.session.count++
-  //       const data: Health = { message: 'pong', count: req.session.count }
-  //       res.send(data)
-  //       return
-  //     }
-  //   }
-  //   next(createError(401))
-  // })
 }

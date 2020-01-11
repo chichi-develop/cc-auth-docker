@@ -12,6 +12,7 @@ yarn add http-errors
 yarn add debug
 yarn add bcryptjs
 yarn add uuid
+yarn add cols
 
 yarn add -D @types/express
 yarn add -D @types/express-session
@@ -23,7 +24,11 @@ yarn add -D @types/axios
 yarn add -D @types/http-errors
 yarn add -D @types/bcryptjs
 yarn add -D @types/uuid
+yarn add -D @types/cors
 yarn add -D ts-loader
 yarn add -D ts-node-dev
 yarn add -D typescript
 yarn add -D prettier
+yarn add -D webpack
+yarn add -D webpack-cli
+yarn add -D webpack-node-externals
