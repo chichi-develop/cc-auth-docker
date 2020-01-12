@@ -5,10 +5,10 @@ services:
     build:
       context: .
     ports:
-      - "8080:3000"
+      - "8342:8342"
     volumes:
       - "./data:/app/data"
-    command: json-server --watch --host 0.0.0.0 /app/data/db.json
+    command: json-server --watch --host 0.0.0.0 /app/data/db.json --port 8342
 
 networks:
   default:

@@ -6,4 +6,4 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 RUN yarn
 
-EXPOSE 3000
+EXPOSE 8341

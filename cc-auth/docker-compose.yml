@@ -2,10 +2,11 @@ version: "3.3"
 
 services:
   node:
+    container_name: cc-auth
     build:
       context: .
     ports:
-      - "8341:3000"
+      - "8341:8341"
     command: yarn run docker:build:prod
 
 networks:
