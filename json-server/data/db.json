@@ -4,25 +4,33 @@
       "id": "1de3z8o",
       "email": "owner@test.com",
       "password": "$2a$10$eUXfnzX009hlyYzAssDoZeW56Zrb5Gjmru4CfP0/A1EURQ2AkKHlu",
-      "privilege": ["cc-publis-owner"]
+      "privilege": {
+        "viewPublis": true,
+        "editPublisCstm": true,
+        "editMdmm": true
+      }
     },
     {
       "id": "2f24vvg",
       "email": "kanri@test.com",
       "password": "$2a$10$eUXfnzX009hlyYzAssDoZeW56Zrb5Gjmru4CfP0/A1EURQ2AkKHlu",
-      "privilege": ["cc-publis-viewer", "cc-publis-editor-kanri"]
+      "privilege": {
+        "viewPublis": true,
+        "editPublisCstm": true,
+        "editMdmm": true
+      }
     },
     {
       "id": "d1u9nq",
       "email": "eigyo@test.com",
       "password": "$2a$10$eUXfnzX009hlyYzAssDoZeW56Zrb5Gjmru4CfP0/A1EURQ2AkKHlu",
-      "privilege": ["cc-publis-viewer", "cc-publis-editor-eigyo"]
+      "privilege": { "viewPublis": true }
     },
     {
       "id": "a9uc7jq",
       "email": "viewer@test.com",
       "password": "$2a$10$eUXfnzX009hlyYzAssDoZeW56Zrb5Gjmru4CfP0/A1EURQ2AkKHlu",
-      "privilege": ["cc-publis-viewer"]
+      "privilege": { "viewPublis": true }
     }
   ]
 }
