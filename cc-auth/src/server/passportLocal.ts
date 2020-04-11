@@ -14,10 +14,10 @@ export default (app: Express.Application) => {
         .then(res => {
           const auth = res.data[0]
           if (!auth) {
-            return done(null, false, { message: 'Invalid credentials.\n' })
+            return done(null, false, { message: 'invalid credentials' })
           }
           if (!bcrypt.compareSync(password, auth.password)) {
-            return done(null, false, { message: 'Invalid credentials.\n' })
+            return done(null, false, { message: 'invalid credentials' })
           }
           return done(null, auth)
         })
