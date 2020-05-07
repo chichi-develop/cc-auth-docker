@@ -19,7 +19,15 @@ export default (app: Express.Application) => {
   app.post('/auth/login', function (req, res, next) {
     passport.authenticate('local', (err, auth: Auth, info) => {
       if (info) {
-        return res.send({ error: { message: info.message } })
+        let err
+        if (info.message === "invalid credentials") {
+          err = { message: info.message, code: 'invalidCredentials' };
+        } else if (info.message === "Missing credentials") {
+          err = { message: info.message, code: 'missingCredentials' };
+        } else {
+          err = { message: info.message };
+        }
+        return res.send({ error: err })
       }
       if (err) {
         return next(err)
