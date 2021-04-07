@@ -1,9 +1,8 @@
+import axios from 'axios'
+import bcrypt from 'bcryptjs'
 import Express from 'express'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
-import axios from 'axios'
-import bcrypt from 'bcryptjs'
-import { Auth } from '../types/api'
 import { API_HOST, API_PORT } from '../config/constants'
 
 export default (app: Express.Application) => {
@@ -25,7 +24,7 @@ export default (app: Express.Application) => {
     })
   )
 
-  passport.serializeUser((auth: Auth, done) => {
+  passport.serializeUser((auth: any, done) => {
     done(null, auth.id)
   })
 
